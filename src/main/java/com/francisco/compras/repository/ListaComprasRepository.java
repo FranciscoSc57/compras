@@ -14,8 +14,9 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface ListaComprasRepository extends JpaRepository<ListaCompras, Integer>{
 	
+	List<ListaCompras> findAllByIdLista(Integer idLista);
 	ListaCompras findByNombre(String nombre);
-	Optional<List<ListaCompras>> findAllByClientes(Clientes cliente);
+	List<ListaCompras> findAllByClientes(Clientes cliente);
 	Optional<ListaCompras> findByClientes(Clientes cliente);
 	@Transactional
 	void deleteAllByIdLista(Integer idLista);

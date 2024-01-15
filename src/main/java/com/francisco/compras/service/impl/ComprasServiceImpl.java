@@ -157,12 +157,12 @@ public class ComprasServiceImpl implements ComprasService{
 		
 		try {
 			log.info("Obteniendo listas por cliente");
-			Optional<List<ListaCompras>> listaCompras = listaComprasRepository.findAllByClientes(cliente);
+			List<ListaCompras> listaCompras = listaComprasRepository.findAllByClientes(cliente);
 			
-			if(listaCompras.isPresent()) {
+			if(!listaCompras.isEmpty()) {
 				log.info("Listas de cliente encontradas");
 				
-				listaCompras.get().forEach(compra ->{
+				listaCompras.forEach(compra ->{
 					List<ListaCompraDetalle>detalleCompra = listaComprasDetalleRepository.findAllByListaCompras(compra);
 					listaDetallesCompra.add(detalleCompra);
 				});				
@@ -173,7 +173,7 @@ public class ComprasServiceImpl implements ComprasService{
 				comprasResponse.setMensaje("Ejecutado con exito");
 				httpStatus = HttpStatus.ACCEPTED;				
 			}else {
-				comprasResponse.setHasError(false);
+				comprasResponse.setHasError(true);
 				comprasResponse.setMensaje("Cliente no tiene compras");
 				httpStatus = HttpStatus.NOT_FOUND;				
 			}
@@ -201,7 +201,6 @@ public class ComprasServiceImpl implements ComprasService{
 	}
 
 
-	
 	@Override
 	@LogAspect
 	public ResponseEntity<ComprasResponse> actualizarListaComprasByIdCliente(Integer idCliente) {
@@ -318,13 +317,20 @@ public class ComprasServiceImpl implements ComprasService{
 				
 		try {
 			listaCompras.setIdLista(idLista);
-			listaComprasDetalleRepository.deleteAllByListaCompras(listaCompras);
-			listaComprasRepository.deleteAllByIdLista(idLista);
-			datos.put("message", "Ejecutado con exito");
-			
-			comprasResponse.setHasError(false);
-			comprasResponse.setMensaje("Ejecutado con exito");
-			httpStatus = HttpStatus.ACCEPTED;	
+			List<ListaCompras> listaExiste = listaComprasRepository.findAllByIdLista(idLista);
+			if(listaExiste.isEmpty()) {
+				comprasResponse.setHasError(true);
+				comprasResponse.setMensaje("Lista no encontrada");
+				httpStatus = HttpStatus.NOT_FOUND;
+			}else {
+				listaComprasDetalleRepository.deleteAllByListaCompras(listaCompras);
+				listaComprasRepository.deleteAllByIdLista(idLista);
+				datos.put("message", "Ejecutado con exito");
+				
+				comprasResponse.setHasError(false);
+				comprasResponse.setMensaje("Ejecutado con exito");
+				httpStatus = HttpStatus.ACCEPTED;	
+			}			
 		}
 		catch (IllegalArgumentException e) {
 			comprasResponse.setErrors(e.getMessage());
