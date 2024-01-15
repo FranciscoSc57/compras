@@ -1,14 +1,14 @@
 package com.francisco.compras.service;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.francisco.compras.models.ListaComprasRequest;
+import com.francisco.compras.models.request.ListaComprasRequest;
+import com.francisco.compras.models.response.ComprasResponse;
 
 public interface ComprasService {
 
-	ResponseEntity<Object> guardarListaCompras(ListaComprasRequest listaComprasRequest);
-	ResponseEntity<Object> obtenerListaComprasByIdCliente(Long idCliente);
-	ResponseEntity<Object> actualizarListaComprasByIdCliente(Long idCliente);
-	ResponseEntity<Object> eliminarListaCompras(Long idLista);
+	ResponseEntity<ComprasResponse> guardarListaCompras(ListaComprasRequest listaComprasRequest);
+	ResponseEntity<ComprasResponse> obtenerListaComprasByIdCliente(Integer idCliente);
+	ResponseEntity<ComprasResponse> actualizarListaComprasByIdCliente(Integer idCliente);
+	ResponseEntity<ComprasResponse> eliminarListaCompras(Integer idLista);
 }

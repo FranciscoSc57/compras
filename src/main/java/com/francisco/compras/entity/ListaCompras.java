@@ -2,35 +2,39 @@ package com.francisco.compras.entity;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "lista_compra")
+@Table(name = "ListaCompras")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ListaCompras {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "idLista", nullable = false)
-	private Long idLista;
+	@GeneratedValue(
+			strategy = GenerationType.IDENTITY)
+	@Column(name = "id_lista")
+	private Integer idLista;
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Clientes idCliente;
+	@JoinColumn(
+			name = "customer_id",
+			referencedColumnName = "id_cliente"
+	)
+	private Clientes clientes;
 	
-	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
 	@Column(name = "fechaRegistro")
@@ -42,7 +46,7 @@ public class ListaCompras {
 	@Column(name = "activo")
 	private int activo;
 	
-	ListaCompras(Long idLista){
+	ListaCompras(Integer idLista){
 		this.idLista = idLista;
 	}
 }

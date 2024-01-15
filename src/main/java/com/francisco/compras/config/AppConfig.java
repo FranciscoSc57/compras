@@ -2,6 +2,8 @@ package com.francisco.compras.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.francisco.compras.models.AutenticacionRequest;
 import com.francisco.compras.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,10 @@ public class AppConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return username -> userRepository.findUserByEmail(username)
-				.orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado"));
+				.orElseThrow(()-> new ResponseEntity<>(
+						"UserNorFound",
+						HttpStatus.NOT_FOUND
+						));
 	}
 	
 	@Bean

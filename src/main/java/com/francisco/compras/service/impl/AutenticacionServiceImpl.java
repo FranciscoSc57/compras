@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.francisco.compras.config.JwtService;
 import com.francisco.compras.entity.User;
-import com.francisco.compras.models.AutenticacionRequest;
-import com.francisco.compras.models.AuthResponse;
-import com.francisco.compras.models.RegistroRequest;
+import com.francisco.compras.models.request.AutenticacionRequest;
+import com.francisco.compras.models.request.RegistroRequest;
+import com.francisco.compras.models.response.AuthResponse;
 import com.francisco.compras.repository.UserRepository;
 import com.francisco.compras.service.AutenticacionService;
 import com.francisco.compras.utils.Role;
@@ -20,7 +20,9 @@ public class AutenticacionServiceImpl implements AutenticacionService{
 
 	@Autowired
 	private UserRepository userRepository;
-	private final PasswordEncoder passwordEncoder = null;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
 	private JwtService jwtService;
 	@Autowired
 	private AuthenticationManager authenticationManager;

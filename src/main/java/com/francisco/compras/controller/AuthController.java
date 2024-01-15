@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.francisco.compras.models.AutenticacionRequest;
-import com.francisco.compras.models.AuthResponse;
-import com.francisco.compras.models.RegistroRequest;
+import com.francisco.compras.models.request.AutenticacionRequest;
+import com.francisco.compras.models.request.RegistroRequest;
+import com.francisco.compras.models.response.AuthResponse;
 import com.francisco.compras.service.AutenticacionService;
 
 @RestController

@@ -2,13 +2,7 @@ package com.francisco.compras.config;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.web.configurers.SecurityContextConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,10 +10,18 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.francisco.compras.service.impl.ComprasServiceImpl;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter{
 	
 	private final UserDetailsService userDetailsService;
@@ -32,15 +34,17 @@ public class JwtFilter extends OncePerRequestFilter{
 		final String authHeader = request.getHeader("Authorization");
 		final String jwt;
 		final String userEmail;
-		
+		log.info("******VALIDACION******");
 		if(authHeader == null || !authHeader.startsWith("Bearer")) {
 			filterChain.doFilter(request, response);
+			log.info("******NO Bearer******");
 			return;
 		}
 		jwt = authHeader.substring(7);
 		userEmail = jwtService.getUserName(jwt);
-		
-		if(userEmail == null && SecurityContextHolder.getContext().getAuthentication() == null) {
+		log.info("************" + userEmail);
+		if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+			log.info("******userEmail******");
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 			if(jwtService.validateToken(jwt, userDetails)) {
 				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

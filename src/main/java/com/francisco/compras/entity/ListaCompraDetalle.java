@@ -1,31 +1,27 @@
 package com.francisco.compras.entity;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "lista_compra_detalle")
 @Data
+@IdClass(CompraDetalle.class)
 public class ListaCompraDetalle {
 
-	@EmbeddedId
-	private CompraDetalle idListaCompraDetalle;
+	@Id
+	private ListaCompras listaCompras;
 	
-	@ManyToOne
-	@JoinColumn(name = "idListaCompra", insertable = false, updatable = false)
-	private ListaCompras idLista;
-	
-	@ManyToOne
-	@JoinColumn(name = "idCodigoProducto")
-	private Productos idProducto;
+	@Id
+	private Productos productos;
 	
 	@Column(name = "cantidad")
 	private Integer cantidad;

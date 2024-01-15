@@ -1,8 +1,8 @@
 package com.francisco.compras.service;
 
-import com.francisco.compras.models.AutenticacionRequest;
-import com.francisco.compras.models.AuthResponse;
-import com.francisco.compras.models.RegistroRequest;
+import com.francisco.compras.models.request.AutenticacionRequest;
+import com.francisco.compras.models.request.RegistroRequest;
+import com.francisco.compras.models.response.AuthResponse;
 
 public interface AutenticacionService {
 
