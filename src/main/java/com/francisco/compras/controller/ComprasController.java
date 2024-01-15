@@ -9,15 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.francisco.compras.entity.ListaCompraDetalle;
 import com.francisco.compras.models.request.ListaComprasRequest;
 import com.francisco.compras.models.response.ComprasResponse;
-import com.francisco.compras.repository.ListaComprasDetalleRepository;
 import com.francisco.compras.service.ComprasService;
-import com.francisco.compras.service.LogAspect;
 
 @RestController
 @RequestMapping(value = "api/v1")
@@ -36,8 +32,8 @@ public class ComprasController {
 		return comprasService.obtenerListaComprasByIdCliente(idCliente);
 	}
 	
-	@PutMapping(value = "compras")
-	public ResponseEntity<ComprasResponse> actualizarListaComprasByCliente(@RequestParam Integer idCliente){
+	@PutMapping(value = "compras/{idCliente}")
+	public ResponseEntity<ComprasResponse> actualizarListaComprasByCliente(@PathVariable Integer idCliente){
 		return comprasService.actualizarListaComprasByIdCliente(idCliente);
 	}
 	
