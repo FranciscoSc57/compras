@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "672ea3c7-c30e-4665-82dd-9f60a138aec6",
+		"name": "Compra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32264559"
+	},
+	"item": [
+		{
+			"name": "Registrar Compra 710020 Lista 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":710020,\r\n    \"nombreLista\":\"Lista Semanal\",\r\n    \"productos\":[{\r\n        \"idProducto\":10200,\r\n        \"cantidad\":5\r\n        },\r\n        {\r\n        \"idProducto\":25020,\r\n        \"cantidad\":6\r\n        },\r\n        {\r\n        \"idProducto\":10170,\r\n        \"cantidad\":1\r\n        }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/lista-compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lista-compras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Compra 710020 Lista 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":720010,\r\n    \"nombreLista\":\"Lista Mensual\",\r\n    \"productos\":[{\r\n        \"idProducto\":18156,\r\n        \"cantidad\":5\r\n        }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/lista-compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lista-compras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Compra 720010",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":720010,\r\n    \"nombreLista\":\"Lista Mensual\",\r\n    \"productos\":[{\r\n        \"idProducto\":18156,\r\n        \"cantidad\":5\r\n        }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/lista-compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lista-compras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Compra",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":720010,\r\n    \"nombreLista\":\"Lista Mensual\",\r\n    \"productos\":[{\r\n        \"idProducto\":18156,\r\n        \"cantidad\":5\r\n        }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/compras?idCliente=710020",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"compras"
+					],
+					"query": [
+						{
+							"key": "idCliente",
+							"value": "710020"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Compra",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":720010,\r\n    \"nombreLista\":\"Lista Mensual\",\r\n    \"productos\":[{\r\n        \"idProducto\":18156,\r\n        \"cantidad\":5\r\n        }\r\n        ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/lista-compras?idCliente=720010",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lista-compras"
+					],
+					"query": [
+						{
+							"key": "idCliente",
+							"value": "720010"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Compra",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/lista-compra?idLista=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lista-compra"
+					],
+					"query": [
+						{
+							"key": "idLista",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
