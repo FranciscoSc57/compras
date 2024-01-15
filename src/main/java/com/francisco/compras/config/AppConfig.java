@@ -2,8 +2,6 @@ package com.francisco.compras.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -26,10 +24,7 @@ public class AppConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return username -> userRepository.findUserByEmail(username)
-				.orElseThrow(()-> new ResponseEntity<>(
-						"UserNorFound",
-						HttpStatus.NOT_FOUND
-						));
+				.orElseThrow(()-> new UsernameNotFoundException("Usuario no encontrado"));
 	}
 	
 	@Bean
